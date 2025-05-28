@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import requests
 
-TELEGRAM_TOKEN = '7233502689:AAHE6-fs31OuuXdXd_1jvAv-TaNLGwRbidE'
+TELEGRAM_TOKEN = '7511979228:AAGu0Qoi4Ejny_sLVbRsa4yyLzO6mtXCuOA'
 SCREENSHOT_API_KEY = 'XQY7QG6-R5M4M5P-HMQGWAV-QKDZCJB'
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
