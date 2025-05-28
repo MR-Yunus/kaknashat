@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: learning-path-bot
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: python bot.py
+    envVars:
+      - key: TELEGRAM_TOKEN
+        value: 7233502689:AAHE6-fs31OuuXdXd_1jvAv-TaNLGwRbidE
