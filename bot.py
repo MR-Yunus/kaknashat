@@ -1,28 +1,26 @@
-import os
-import requests
-from bs4 import BeautifulSoup
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+import requests
 
-TOKEN = os.getenv("TELEGRAM_TOKEN", "7233502689:AAHE6-fs31OuuXdXd_1jvAv-TaNLGwRbidE")
+TELEGRAM_TOKEN = '7233502689:AAHE6-fs31OuuXdXd_1jvAv-TaNLGwRbidE'
+SCREENSHOT_API_KEY = 'XQY7QG6-R5M4M5P-HMQGWAV-QKDZCJB'
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("👋 Привет! Напиши /ai чтобы получить дорожную карту ИИ.")
+    await update.message.reply_text("Привет! Отправь мне область, например: frontend, devops, ai и я пришлю карту 📌")
 
-async def ai(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    url = "https://roadmap.sh/ai"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    items = soup.find_all("h2")
+async def roadmap(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not context.args:
+        await update.message.reply_text("Напиши название области, например: frontend")
+        return
 
-    message = "📘 Основные шаги для изучения ИИ:\n"
-    for i, item in enumerate(items[:10], 1):
-        message += f"{i}. {item.text.strip()}\n"
-    await update.message.reply_text(message)
+    topic = context.args[0].lower()
+    url = f"https://roadmap.sh/{topic}"
+    screenshot_url = f"https://api.screenshotapi.net/screenshot?token={SCREENSHOT_API_KEY}&url={url}&output=image&file_type=png"
 
-if __name__ == "__main__":
-    app = ApplicationBuilder().token(TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("ai", ai))
-    print("✅ Бот работает...")
+    await update.message.reply_photo(photo=screenshot_url, caption=f"🗺️ Дорожная карта для: {topic}")
+
+if __name__ == '__main__':
+    app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
+    app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('map', roadmap))
     app.run_polling()
