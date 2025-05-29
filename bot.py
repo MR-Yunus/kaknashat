@@ -4,7 +4,7 @@ import requests
 import logging
 
 # إعدادات البوت
-TELEGRAM_TOKEN = '7511979228:AAGu0Qoi4Ejny_sLVbRsa4yyLzO6mtXCuOA'
+TELEGRAM_TOKEN = '8183870944:AAGftaeglixiUoop3u9xAKQWcBYcULbtzzk'
 ROADMAP_BASE_URL = "https://roadmap.sh/pdfs/roadmaps/"
 
 # القائمة الكاملة للمجالات المتاحة
